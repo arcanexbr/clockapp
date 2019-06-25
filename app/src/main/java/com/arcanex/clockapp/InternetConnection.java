@@ -5,28 +5,37 @@ import android.widget.Toast;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-import static com.arcanex.clockapp.MainActivity.connection;
+import static com.arcanex.clockapp.MainActivity.internet_autoconnection;
 import static com.arcanex.clockapp.MainActivity.internet_autoconnection_time_in_sec;
 import static com.arcanex.clockapp.MainActivity.internet_password;
 import static com.arcanex.clockapp.MainActivity.internet_port;
 import static com.arcanex.clockapp.MainActivity.internet_server;
 import static com.arcanex.clockapp.MainActivity.internet_user;
-import static com.arcanex.clockapp.MainActivity.prefs;
-import static com.arcanex.clockapp.MainActivity.updateUI;
+
 
 
 public class InternetConnection extends Connection {
-    private MqttAndroidClient client;
+    public MqttAndroidClient client;
     public IMqttToken token;
-    public void connect(final Context context, final IMqttActionListener iMqttActionListener) {
+    public  MqttConnectOptions options;
+    public Context context;
+    public IMqttActionListener iMqttActionListener;
+    public MqttCallback mqttCallback;
+
+    public InternetConnection (final Context context, IMqttActionListener iMqttActionListener, MqttCallback mqttCallback) {
+        this.context = context;
+        this.iMqttActionListener = iMqttActionListener;
+        this.mqttCallback = mqttCallback;
+    }
+
+
+    public void connect() {
 
 
         if (client != null) {
@@ -39,71 +48,50 @@ public class InternetConnection extends Connection {
             }
         }
 
+
+
+
+
         String serverURL = "tcp://" + internet_server + ":" + internet_port;
-        String clientId = MqttClient.generateClientId();
+        final String clientId = MqttClient.generateClientId();
         client = new MqttAndroidClient(context, serverURL , clientId);
-
-
-        MqttConnectOptions options = new MqttConnectOptions();
+        options = new MqttConnectOptions();
         options.setUserName(internet_user);
         options.setPassword(internet_password.toCharArray());
 
-        try {
-            token = client.connect(options);
-            token.setActionCallback(iMqttActionListener);
-            client.setCallback(new MqttCallback() {
-                @Override
-                public void connectionLost(Throwable cause) {
-                    Toast.makeText(context, cause.getMessage(), Toast.LENGTH_LONG).show();
-
-                    class Reconnction extends Thread {
-                        @Override
-                        public void run() {
-                            while (!connection.client.isConnected()) {
-                                connect(context, iMqttActionListener);
-                                try {
-                                    sleep(internet_autoconnection_time_in_sec * 1000);
-                                } catch (InterruptedException a) {
-                                    a.printStackTrace();
-                                }
-                            }
-                        }
-                    }
-                    Reconnction reconnction = new Reconnction();
-                    reconnction.start();
-
-                }
-
-                @Override
-                public void messageArrived(String topic, MqttMessage message) throws Exception {
-
-                }
-
-                @Override
-                public void deliveryComplete(IMqttDeliveryToken token) {
-
-                }
-            });
-
-
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
+        Connect connect = new Connect();
+        connect.start();
 
     }
 
 
 
 
-
-    public void disconnect() {
-        if (client.isConnected()) {
+    class Connect extends Thread {
+        @Override
+        public void run() {
             try {
-                client.disconnect();
-            } catch (MqttException a) {
-                a.printStackTrace();
+                client.setCallback(mqttCallback);
+                token = client.connect(options);
+                token.setActionCallback(iMqttActionListener);
+                while (internet_autoconnection & !client.isConnected()) {
+                    sleep(internet_autoconnection_time_in_sec*1000);
+                    if (!client.isConnected()) {
+                        token = client.connect(options);
+                        token.setActionCallback(iMqttActionListener);
+                    }
+                }
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
         }
+
     }
+
+
 
 }
