@@ -15,6 +15,8 @@ import static com.arcanex.clockapp.MainActivity.internet_port;
 import static com.arcanex.clockapp.MainActivity.internet_server;
 import static com.arcanex.clockapp.MainActivity.internet_user;
 import static com.arcanex.clockapp.MainActivity.prefs;
+import static com.arcanex.clockapp.MainActivity.ssid;
+import static com.arcanex.clockapp.MainActivity.wifi_password;
 
 
 public class SettingsActivity extends PreferenceActivity {
@@ -26,8 +28,10 @@ public class SettingsActivity extends PreferenceActivity {
         findPreference("server").setSummary(prefs.getString("server", "none"));
         findPreference("port").setSummary(prefs.getString("port", "none"));
         findPreference("user").setSummary(prefs.getString("user", "none"));
-        findPreference("password").setSummary(prefs.getString("password", "none"));
+        findPreference("mqtt_password").setSummary(prefs.getString("password", "none"));
         findPreference("autoConnect_timer").setSummary("Текущее значение - " + prefs.getString("autoConnect_timer", "10") + " секунд");
+        findPreference("ssid").setSummary(prefs.getString("ssid", "none"));
+        findPreference("wifi_password").setSummary(prefs.getString("wifi_password", "none"));
 
 
 
@@ -55,7 +59,7 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
             }
         });
-        findPreference("password").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+        findPreference("mqtt_password").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 preference.setSummary(o.toString());
@@ -78,6 +82,23 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
             }
         });
+        findPreference("ssid").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                ssid = o.toString();
+                preference.setSummary(o.toString());
+                return true;
+            }
+        });
+        findPreference("wifi_password").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                wifi_password = o.toString();
+                preference.setSummary(o.toString());
+                return true;
+            }
+        });
+
 
 
 

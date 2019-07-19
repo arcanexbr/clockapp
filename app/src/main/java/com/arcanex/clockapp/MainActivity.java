@@ -1,19 +1,40 @@
 package com.arcanex.clockapp;
 
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
+
+import com.google.android.material.navigation.NavigationView;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+
+
+import java.util.List;
+
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.ACCESS_NETWORK_STATE;
+import static android.Manifest.permission.ACCESS_WIFI_STATE;
+import static android.Manifest.permission.CHANGE_NETWORK_STATE;
+import static android.Manifest.permission.CHANGE_WIFI_MULTICAST_STATE;
+import static android.Manifest.permission.CHANGE_WIFI_STATE;
+import static android.Manifest.permission.INTERNET;
+import static android.Manifest.permission.SYSTEM_ALERT_WINDOW;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 
 public class MainActivity extends Activity  {
@@ -24,8 +45,12 @@ public class MainActivity extends Activity  {
     static String internet_server;
     static String internet_user;
     static String internet_password;
+    static String ssid;
+    static String wifi_password;
     static boolean internet_autoconnection;
+    static boolean ESPConnectedToMQTT;
     static int internet_autoconnection_time_in_sec;
+    static String[] MQTTsubscribes = {"call_ANDROID"};
 
 
 
@@ -33,13 +58,28 @@ public class MainActivity extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        LocalConnection localConnection = new LocalConnection(MainActivity.this);
+        if (checkSelfPermission(ACCESS_WIFI_STATE) != PERMISSION_GRANTED || checkSelfPermission(ACCESS_COARSE_LOCATION) != PERMISSION_GRANTED || checkSelfPermission(ACCESS_FINE_LOCATION) != PERMISSION_GRANTED) {
+        requestPermissions(new String[]{ACCESS_WIFI_STATE, ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION}, 0);
+        }
+        Toast.makeText(getApplicationContext(), localConnection.wifiManager.getScanResults().get(2).SSID, Toast.LENGTH_LONG).show();
+
+
+
+
+
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         settingsSynchornize();
-        internetConnection = new InternetConnection(getApplicationContext(), new IMqttActionListener() {
+        internetConnection = new InternetConnection(MainActivity.this, new IMqttActionListener() {
             @Override
             public void onSuccess(IMqttToken asyncActionToken) {
                 updateUI.updateInternetConnection(UpdateUI.INTERNET_CONNECTION_SUCCESFUL);
+                try {
+                    internetConnection.client.subscribe(MQTTsubscribes, new int[]{0});
+                } catch (Exception a) {
+                    a.printStackTrace();
+                }
 
             }
 
@@ -63,7 +103,12 @@ public class MainActivity extends Activity  {
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
-
+                System.out.println("messagearrived");
+            if(topic.equals("call_ANDROID")){
+                System.out.println("callESP");
+                ESPConnectedToMQTT = true;
+                Toast.makeText(getApplicationContext(), "Nightlight удачно подключился к Wi-Fi", Toast.LENGTH_LONG).show();
+            }
             }
 
             @Override
@@ -73,6 +118,7 @@ public class MainActivity extends Activity  {
         });
         updateUI = new UpdateUI(MainActivity.this);
         internetConnection.connect();
+        internetConnection.checkESPInMQTT();
         findViewById(R.id.internet_connection_fail).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,6 +145,7 @@ public class MainActivity extends Activity  {
         findViewById(R.id.button_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
             }
         });

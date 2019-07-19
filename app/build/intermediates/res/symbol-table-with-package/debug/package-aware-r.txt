@@ -1379,7 +1379,6 @@ id beginning
 id blocking
 id bottom
 id buttonPanel
-id button_back_to_menu
 id button_menu
 id button_settings
 id calendar_days_header
@@ -1470,6 +1469,7 @@ id month_grid
 id month_next
 id month_pager
 id month_previous
+id mqtt_password
 id mtrl_calendar_frame
 id mtrl_card_checked_layer_id
 id mtrl_child_content_container
@@ -1494,7 +1494,6 @@ id parallax
 id parent
 id parentPanel
 id parent_matrix
-id password
 id password_toggle
 id peekHeight
 id percent
@@ -1550,6 +1549,7 @@ id spread_inside
 id src_atop
 id src_in
 id src_over
+id ssid
 id standard
 id start
 id stretch
@@ -1573,7 +1573,6 @@ id textStart
 id textView
 id textView2
 id textView3
-id textView4
 id text_input_end_icon
 id text_input_start_icon
 id textinput_counter
@@ -1599,6 +1598,7 @@ id useLogo
 id user
 id view_offset_helper
 id visible
+id wifi_password
 id window
 id withText
 id wrap

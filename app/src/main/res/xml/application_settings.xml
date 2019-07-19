@@ -27,8 +27,8 @@
             android:inputType="text"
             />
         <EditTextPreference
-            android:id="@+id/password"
-            android:key="password"
+            android:id="@+id/mqtt_password"
+            android:key="mqtt_password"
             android:title="Пароль"
             android:defaultValue="uazcTDCGNR6S"
             android:dialogTitle="Новый пароль"
@@ -50,6 +50,25 @@
 
 
 
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Настройка подключения NightLight (UDP-протокол)">
+        <EditTextPreference
+            android:id="@+id/ssid"
+            android:key="ssid"
+            android:title="Имя сети Wi-Fi"
+            android:defaultValue=""
+            android:dialogTitle="Имя сети Wi-Fi"
+            android:inputType="text"
+            />
+        <EditTextPreference
+            android:id="@+id/wifi_password"
+            android:key="wifi_password"
+            android:title="Пароль от Wi-Fi"
+            android:defaultValue=""
+            android:dialogTitle="Пароль от Wi-Fi"
+            android:inputType="text"
+            />
     </PreferenceCategory>
 
 

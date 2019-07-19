@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-29:12
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-35:12
 MERGED from [com.google.android.material:material:1.1.0-alpha07] C:\Users\kiril\.gradle\caches\transforms-2\files-2.1\753b90579845db928a66a794edffee8a\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.1.0-beta01] C:\Users\kiril\.gradle\caches\transforms-2\files-2.1\e9a6b4cec38f62ae8bab9cfd1171ee2d\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\kiril\.gradle\caches\transforms-2\files-2.1\3f8759c1e7c5c533a138a81b486ad967\AndroidManifest.xml:2:1-11:12
@@ -39,41 +39,57 @@ MERGED from [androidx.savedstate:savedstate:1.0.0-beta01] C:\Users\kiril\.gradle
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\kiril\.gradle\caches\transforms-2\files-2.1\d02bd48fdf5c74d91a6393d8ba66db81\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\kiril\.gradle\caches\transforms-2\files-2.1\5c32b06420765e14946a14f3d258db54\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\kiril\.gradle\caches\transforms-2\files-2.1\60ae10fbc4bfd2f714a21e67ea64c090\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-29:12
-INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-29:12
+INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-35:12
 	package
 		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:3:5-35
 		INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-29:12
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-35:12
 		INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-29:12
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:1-35:12
 		INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:5:5-76
+	android:name
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:5:22-73
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:6:5-76
+	android:name
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:6:22-73
 uses-permission#android.permission.WAKE_LOCK
-ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:5:5-68
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:7:5-68
 	android:name
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:5:22-65
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:7:22-65
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:6:5-67
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:8:5-67
 	android:name
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:6:22-64
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:8:22-64
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:7:5-79
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:9:5-79
 	android:name
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:7:22-76
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:9:22-76
 uses-permission#android.permission.READ_PHONE_STATE
-ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:8:5-75
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:10:5-75
 	android:name
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:8:22-72
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:10:22-72
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:11:5-79
+	android:name
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:11:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:12:5-81
+	android:name
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:12:22-78
 application
-ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:10:5-27:19
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:16:5-33:19
 MERGED from [com.google.android.material:material:1.1.0-alpha07] C:\Users\kiril\.gradle\caches\transforms-2\files-2.1\753b90579845db928a66a794edffee8a\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.1.0-alpha07] C:\Users\kiril\.gradle\caches\transforms-2\files-2.1\753b90579845db928a66a794edffee8a\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\kiril\.gradle\caches\transforms-2\files-2.1\3f8759c1e7c5c533a138a81b486ad967\AndroidManifest.xml:9:5-20
@@ -85,39 +101,39 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0-rc01] C:\Use
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.1.0-rc01] C:\Users\kiril\.gradle\caches\transforms-2\files-2.1\7dc11a3dcaea3af391da7bb44a49eef3\AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:15:9-35
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:21:9-35
 	android:label
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:13:9-41
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:19:9-41
 	android:roundIcon
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:14:9-54
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:20:9-54
 	android:icon
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:12:9-43
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:18:9-43
 	android:allowBackup
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:11:9-35
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:17:9-35
 	android:theme
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:16:9-40
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:22:9-40
 activity#com.arcanex.clockapp.SettingsActivity
-ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:17:9-54
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:23:9-54
 	android:name
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:17:19-51
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:23:19-51
 activity#com.arcanex.clockapp.MainActivity
-ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:18:9-24:20
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:24:9-30:20
 	android:name
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:18:19-47
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:24:19-47
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:19:13-23:29
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:25:13-29:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:20:17-69
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:26:17-69
 	android:name
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:20:25-66
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:26:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:22:17-77
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:28:17-77
 	android:name
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:22:27-74
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:28:27-74
 service#org.eclipse.paho.android.service.MqttService
-ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:26:9-80
+ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:32:9-80
 	android:name
-		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:26:18-77
+		ADDED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml:32:18-77
 uses-sdk
 INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\kiril\StudioProjects\clockapp\app\src\main\AndroidManifest.xml
