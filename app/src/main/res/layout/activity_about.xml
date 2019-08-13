@@ -55,7 +55,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/nokia_text_regular"
-        android:text="  Творческий подарок от знакомого, надеющегося, что этот ночник будет приятным зрелищем не только во время тоски душевной, но и в хорошие дни. Пусть, хоть и не ламповый, но все же теплый свет будет согревать владельца холодной ночью."
+        android:text=" Описание"
         android:textColor="#FFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
