@@ -1,7 +1,3 @@
 <resources>
-    <string name="app_name">MY PROJECT</string>
-    <string name="current_port">default</string>
-    <string name="current_server">default</string>
-    <string name="current_user">default</string>
-    <string name="current_password">default</string>
+    <string name="espWifiName">Nightlight</string>
 </resources>

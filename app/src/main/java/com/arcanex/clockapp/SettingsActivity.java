@@ -2,36 +2,96 @@ package com.arcanex.clockapp;
 
 
 import android.app.ActionBar;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Application;
+import android.app.Service;
+import android.content.Context;
+import android.content.DialogInterface;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
+import android.provider.Settings;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.util.AttributeSet;
+import android.view.ActionMode;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
-import static com.arcanex.clockapp.MainActivity.internet_autoconnection;
-import static com.arcanex.clockapp.MainActivity.internet_autoconnection_time_in_sec;
-import static com.arcanex.clockapp.MainActivity.internet_password;
-import static com.arcanex.clockapp.MainActivity.internet_port;
-import static com.arcanex.clockapp.MainActivity.internet_server;
-import static com.arcanex.clockapp.MainActivity.internet_user;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+
+import smartdevelop.ir.eram.showcaseviewlib.GuideView;
+import smartdevelop.ir.eram.showcaseviewlib.config.DismissType;
+
+import static com.arcanex.clockapp.MainActivity.internetConnection;
+
 import static com.arcanex.clockapp.MainActivity.prefs;
+import static com.arcanex.clockapp.MainActivity.service;
 import static com.arcanex.clockapp.MainActivity.ssid;
 import static com.arcanex.clockapp.MainActivity.wifi_password;
 
 
+
 public class SettingsActivity extends PreferenceActivity {
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
         super.onCreate(savedInstanceState);
+
+
         addPreferencesFromResource(R.xml.application_settings);
+
+
+
+
+
+
+
+
+
+
+
 
         findPreference("server").setSummary(prefs.getString("server", "none"));
         findPreference("port").setSummary(prefs.getString("port", "none"));
         findPreference("user").setSummary(prefs.getString("user", "none"));
-        findPreference("mqtt_password").setSummary(prefs.getString("password", "none"));
+        findPreference("mqtt_password").setSummary(prefs.getString("mqtt_password", "none"));
         findPreference("autoConnect_timer").setSummary("Текущее значение - " + prefs.getString("autoConnect_timer", "10") + " секунд");
         findPreference("ssid").setSummary(prefs.getString("ssid", "none"));
         findPreference("wifi_password").setSummary(prefs.getString("wifi_password", "none"));
+
+
+
+
+
+
+
 
 
 
@@ -39,7 +99,8 @@ public class SettingsActivity extends PreferenceActivity {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 preference.setSummary(o.toString());
-                internet_port = o.toString();
+                service.internetConnection.internet_port = o.toString();
+                service.internetConnection.connect();
                 return true;
             }
         });
@@ -47,7 +108,8 @@ public class SettingsActivity extends PreferenceActivity {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 preference.setSummary(o.toString());
-                internet_server = o.toString();
+                service.internetConnection.internet_server = o.toString();
+                service.internetConnection.connect();
                 return true;
             }
         });
@@ -55,7 +117,8 @@ public class SettingsActivity extends PreferenceActivity {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 preference.setSummary(o.toString());
-                internet_user = o.toString();
+                service.internetConnection.internet_user = o.toString();
+                service.internetConnection.connect();
                 return true;
             }
         });
@@ -63,21 +126,26 @@ public class SettingsActivity extends PreferenceActivity {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 preference.setSummary(o.toString());
-                internet_password = o.toString();
+                service.internetConnection.internet_password = o.toString();
+                service.internetConnection.connect();
+
                 return true;
             }
         });
         findPreference("autoConnect_switch").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
-                internet_autoconnection = Boolean.getBoolean(o.toString());
+                service.internetConnection.internet_autoconnection = (boolean) o;
+                if ((boolean) o) {
+                    service.internetConnection.connect();
+                }
                 return true;
             }
         });
         findPreference("autoConnect_timer").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
-                internet_autoconnection_time_in_sec = Integer.parseInt(o.toString());
+                service.internetConnection.internet_autoconnection_time_in_sec = Integer.parseInt(o.toString());
                 preference.setSummary("Текущее значение - " + o.toString() + " секунд");
                 return true;
             }
@@ -98,10 +166,37 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
             }
         });
+        findPreference("sendAuthData").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Service.WIFI_SERVICE);
+                System.out.println(wifiManager.getConnectionInfo().getSSID());
+                if (wifiManager.getConnectionInfo().getSSID().equals("\"Nightlight\"")) {
+                    MainActivity.localConnection.sendAuthData(SettingsActivity.this, new LocalConnection.LocalConnecionListener() {
+                        @Override
+                        public void onSuccessSend() {
+
+                        }
+
+                        @Override
+                        public void onNoCallback() {
+
+                        }
+                    });
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "Ты сначала к хот-спорту Nightlight подключись, а потом поговорим", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    startActivityForResult(new Intent(Settings.ACTION_WIFI_SETTINGS), 0);
+                }
 
 
-
-
+                return true;
+            }
+        });
 
 
         SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
@@ -111,10 +206,12 @@ public class SettingsActivity extends PreferenceActivity {
             }
         };
 
-        prefs.registerOnSharedPreferenceChangeListener(listener);
-
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
+    }
 }

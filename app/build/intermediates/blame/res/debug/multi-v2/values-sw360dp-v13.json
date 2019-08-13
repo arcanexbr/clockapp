@@ -4,13 +4,30 @@
             "outputFile": "C:\\Users\\kiril\\StudioProjects\\clockapp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw360dp-v13\\values-sw360dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\kiril\\.gradle\\caches\\transforms-2\\files-2.1\\753b90579845db928a66a794edffee8a\\res\\values-sw360dp-v13\\values-sw360dp-v13.xml",
+                    "source": "C:\\Users\\kiril\\.gradle\\caches\\transforms-2\\files-2.1\\4a587df01cd584ee64300257721d1145\\res\\values-sw360dp-v13\\values-sw360dp-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "71",
+                        "endOffsets": "122"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\kiril\\.gradle\\caches\\transforms-2\\files-2.1\\83273af0b562f26119bf9fbee6d16956\\res\\values-sw360dp-v13\\values-sw360dp-v13.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
                         "startOffsets": "55,109",
                         "endColumns": "53,60",
                         "endOffsets": "104,165"
+                    },
+                    "to": {
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "127,181",
+                        "endColumns": "53,60",
+                        "endOffsets": "176,237"
                     }
                 }
             ]

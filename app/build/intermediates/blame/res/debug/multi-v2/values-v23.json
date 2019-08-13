@@ -4,7 +4,7 @@
             "outputFile": "C:\\Users\\kiril\\StudioProjects\\clockapp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\kiril\\.gradle\\caches\\transforms-2\\files-2.1\\25944c73d3e1fd09a200756460614813\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\kiril\\.gradle\\caches\\transforms-2\\files-2.1\\8c5f850de4609b11e091f99ae31fa436\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\kiril\\.gradle\\caches\\transforms-2\\files-2.1\\753b90579845db928a66a794edffee8a\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\kiril\\.gradle\\caches\\transforms-2\\files-2.1\\83273af0b562f26119bf9fbee6d16956\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,6,9,12,16,19",
                         "startColumns": "4,4,4,4,4,4",
@@ -42,7 +42,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\kiril\\.gradle\\caches\\transforms-2\\files-2.1\\e9a6b4cec38f62ae8bab9cfd1171ee2d\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\kiril\\.gradle\\caches\\transforms-2\\files-2.1\\7df21535a815cd4d5c03949e53aa3845\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,20,34,35,36,37,41,42,43,44",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",

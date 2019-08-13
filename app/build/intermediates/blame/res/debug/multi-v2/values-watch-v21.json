@@ -4,7 +4,7 @@
             "outputFile": "C:\\Users\\kiril\\StudioProjects\\clockapp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v21\\values-watch-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\kiril\\.gradle\\caches\\transforms-2\\files-2.1\\e9a6b4cec38f62ae8bab9cfd1171ee2d\\res\\values-watch-v21\\values-watch-v21.xml",
+                    "source": "C:\\Users\\kiril\\.gradle\\caches\\transforms-2\\files-2.1\\7df21535a815cd4d5c03949e53aa3845\\res\\values-watch-v21\\values-watch-v21.xml",
                     "from": {
                         "startLines": "2,6,10",
                         "startColumns": "4,4,4",

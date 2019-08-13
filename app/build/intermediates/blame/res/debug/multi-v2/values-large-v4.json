@@ -4,7 +4,7 @@
             "outputFile": "C:\\Users\\kiril\\StudioProjects\\clockapp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-large-v4\\values-large-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\kiril\\.gradle\\caches\\transforms-2\\files-2.1\\e9a6b4cec38f62ae8bab9cfd1171ee2d\\res\\values-large-v4\\values-large-v4.xml",
+                    "source": "C:\\Users\\kiril\\.gradle\\caches\\transforms-2\\files-2.1\\7df21535a815cd4d5c03949e53aa3845\\res\\values-large-v4\\values-large-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\kiril\\.gradle\\caches\\transforms-2\\files-2.1\\753b90579845db928a66a794edffee8a\\res\\values-large-v4\\values-large-v4.xml",
+                    "source": "C:\\Users\\kiril\\.gradle\\caches\\transforms-2\\files-2.1\\83273af0b562f26119bf9fbee6d16956\\res\\values-large-v4\\values-large-v4.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

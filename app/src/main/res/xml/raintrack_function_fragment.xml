@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <SwitchPreference
+        android:key="weathertrack"
+        android:title="Включить функцию">
+
+
+    </SwitchPreference>
+
+
+
+
+    <Preference
+        android:title="Выбрать цвет свечения"
+        android:singleLine="false"
+        android:breakStrategy="balanced">
+
+    </Preference>
+
+
+    <EditTextPreference
+        android:key="color"
+        android:title="Время свечения"
+        android:summary="Текущее значение - 20 секунд"
+        android:inputType="number">
+    </EditTextPreference>
+
+
+</PreferenceScreen>

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.javiersantos:AppUpdater:2.7@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3c529868e5d1d60975f4ce9f23c9c448/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3c529868e5d1d60975f4ce9f23c9c448/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.javiersantos/AppUpdater/2.7/f7601e58d7c45757f5bf5fad533bb0eee17f1921/AppUpdater-2.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

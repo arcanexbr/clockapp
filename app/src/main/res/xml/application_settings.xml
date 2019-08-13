@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:divider="#FFF"
+    android:dividerHeight="10dp">
 
 
+
+    <PreferenceCategory
+
+
+        android:title="Настройка подключения Nightlight (UDP-протокол)">
+
+
+        <EditTextPreference
+            android:id="@+id/ssid"
+            android:defaultValue="nope"
+            android:dialogTitle="Имя сети Wi-Fi"
+            android:inputType="text"
+            android:key="ssid"
+            android:shadowColor="#050505"
+            android:title="Имя сети Wi-Fi" />
+        <EditTextPreference
+            android:id="@+id/wifi_password"
+            android:key="wifi_password"
+            android:title="Пароль от Wi-Fi"
+            android:defaultValue="nope"
+            android:dialogTitle="Пароль от Wi-Fi"
+            android:inputType="text"
+            />
+        <Preference
+            android:id="@+id/sendAuthData"
+            android:key="sendAuthData"
+            android:title="Отправить данные"
+            android:summary="Нажми, чтобы отправить текущие авторизационные данные в Nightlight через хот-спот"
+            />
+
+    </PreferenceCategory>
     <PreferenceCategory
         android:title="Настройка интернет-подключения (MQTT)">
         <EditTextPreference
@@ -41,35 +75,18 @@
             android:summary="Автоматическое переподключение при потере соединения"
             />
         <EditTextPreference
+            android:theme="@android:style/Theme.Material.Light.NoActionBar"
             android:key="autoConnect_timer"
             android:title="Время между попытками переподключения"
             android:summary="Текущее значение - 30 секунд"
             android:dependency="autoConnect_switch"
             android:inputType="number"
             android:defaultValue="30"/>
-
-
-
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="Настройка подключения NightLight (UDP-протокол)">
-        <EditTextPreference
-            android:id="@+id/ssid"
-            android:key="ssid"
-            android:title="Имя сети Wi-Fi"
-            android:defaultValue=""
-            android:dialogTitle="Имя сети Wi-Fi"
-            android:inputType="text"
-            />
-        <EditTextPreference
-            android:id="@+id/wifi_password"
-            android:key="wifi_password"
-            android:title="Пароль от Wi-Fi"
-            android:defaultValue=""
-            android:dialogTitle="Пароль от Wi-Fi"
-            android:inputType="text"
-            />
-    </PreferenceCategory>
+
+
+
+
 
 
 </PreferenceScreen>

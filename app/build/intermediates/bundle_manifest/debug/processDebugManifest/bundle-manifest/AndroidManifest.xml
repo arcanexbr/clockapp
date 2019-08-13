@@ -16,18 +16,31 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_launcher_round"
+        android:label="Nightlight"
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.arcanex.clockapp.SettingsActivity" />
+        <activity android:name="com.arcanex.clockapp.ColorPickActivity" />
+        <activity
+            android:name="com.arcanex.clockapp.SpecialFunctionActivity"
+            android:theme="@style/AppTheme.AppCompat" />
+        <activity android:name="com.arcanex.clockapp.AuthorActivity" />
+        <activity android:name="com.arcanex.clockapp.InformationAndPower" />
+        <activity android:name="com.arcanex.clockapp.AboutActivity" />
+        <activity android:name="com.arcanex.clockapp.StartActivity" />
+        <activity
+            android:name="com.arcanex.clockapp.SettingsActivity"
+            android:theme="@style/AppTheme.WhiteText" />
         <activity android:name="com.arcanex.clockapp.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +50,33 @@
         </activity>
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
+        <service
+            android:name="com.arcanex.clockapp.MyService"
+            android:directBootAware="true"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name="com.arcanex.clockapp.BootBroadcast"
+            android:permission="android.intent.action" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="acc49ddf6ea76bb8b1991c2a79e872e4f4b9142c" />
+
+        <provider
+            android:name="com.crashlytics.android.CrashlyticsInitProvider"
+            android:authorities="com.arcanex.clockapp.crashlyticsinitprovider"
+            android:exported="false"
+            android:initOrder="90" />
+
+        <meta-data
+            android:name="firebase_crashlytics_ndk_enabled"
+            android:value="true" />
 
         <provider
             android:name="com.android.tools.ir.server.InstantRunContentProvider"

@@ -1,4 +1,4 @@
-#Fri Jul 19 11:46:24 MSK 2019
+#Thu Aug 08 02:34:51 MSK 2019
 base.0=C\:\\Users\\kiril\\StudioProjects\\clockapp\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\4
 path.0=classes.dex
 renamed.0=classes.dex
