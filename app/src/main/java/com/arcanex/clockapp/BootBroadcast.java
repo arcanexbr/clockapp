@@ -5,26 +5,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
-
-import static android.os.Looper.getMainLooper;
-
+import android.os.Looper;
 
 public class BootBroadcast extends BroadcastReceiver {
     Context context;
-    @Override
-    public void onReceive(final Context context, Intent intent) {
-        Handler handler = new Handler(getMainLooper());
-        handler.post(new Runnable() {
-            @Override
+
+    public void onReceive(final Context context2, Intent intent) {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
             public void run() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    context.startForegroundService(new Intent(context, MyService.class));
+                if (Build.VERSION.SDK_INT >= 26) {
+                    context2.startForegroundService(new Intent(context2, MyService.class));
                 }
             }
         });
-
-
-
     }
-
 }

@@ -1,8 +1,10 @@
 package com.arcanex.clockapp;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -27,6 +30,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import static androidx.recyclerview.widget.DividerItemDecoration.VERTICAL;
+import static com.arcanex.clockapp.MainActivity.homeLocation;
 import static com.arcanex.clockapp.MainActivity.service;
 
 
@@ -44,7 +48,7 @@ public class SpecialFunctionActivity extends FragmentActivity {
     }
 
 
-    private static class WeatherTrackFragment extends Fragment {
+    public static class WeatherTrackFragment extends Fragment {
 
         WeatherTrackFragment newInstance() {
             WeatherTrackFragment weatherTrackFragment = new WeatherTrackFragment();
@@ -117,14 +121,16 @@ public class SpecialFunctionActivity extends FragmentActivity {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.raintrack_function_fragment, rootKey);
             getPreferenceManager().getPreferenceScreen().getPreference(0).setIconSpaceReserved(false);
+            getPreferenceManager().getPreferenceScreen().getPreference(0).setEnabled(false);
             getPreferenceManager().getPreferenceScreen().getPreference(1).setIconSpaceReserved(false);
             getPreferenceManager().getPreferenceScreen().getPreference(2).setIconSpaceReserved(false);
+            getPreferenceManager().getPreferenceScreen().getPreference(2).setEnabled(false);
 
 
         }
     }
 
-    private static class HomeTrackFragment extends Fragment {
+    public static class HomeTrackFragment extends Fragment {
 
         HomeTrackFragment newInstance() {
             HomeTrackFragment homeTrackFragment = new HomeTrackFragment();
@@ -193,6 +199,7 @@ public class SpecialFunctionActivity extends FragmentActivity {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.hometrack_function_fragment, rootKey);
             getPreferenceManager().getPreferenceScreen().getPreference(0).setIconSpaceReserved(false);
+            getPreferenceManager().getPreferenceScreen().getPreference(0).setEnabled(false);
             getPreferenceManager().getPreferenceScreen().getPreference(0).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -206,6 +213,21 @@ public class SpecialFunctionActivity extends FragmentActivity {
                 }
             });
             getPreferenceManager().getPreferenceScreen().getPreference(1).setIconSpaceReserved(false);
+            getPreferenceManager().getPreferenceScreen().getPreference(1).setEnabled(true);
+            getPreferenceManager().getPreferenceScreen().getPreference(1).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+
+                    getPreferenceManager().getSharedPreferences().edit().putString("homeAddress", service.locationHelper.setHomeAddress()).commit();
+                    getPreferenceManager().getPreferenceScreen().getPreference(2).setSummary("Текущий адрес: " + getPreferenceManager().getSharedPreferences().getString("homeAddress", ""));
+
+
+
+
+                    return false;
+
+                }
+            });
             getPreferenceManager().getPreferenceScreen().getPreference(2).setIconSpaceReserved(false);
             getPreferenceManager().getPreferenceScreen().getPreference(2).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override

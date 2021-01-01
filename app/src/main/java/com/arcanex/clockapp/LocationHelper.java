@@ -1,6 +1,7 @@
 package com.arcanex.clockapp;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -14,13 +15,16 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
 import java.util.List;
 
 import static com.arcanex.clockapp.MainActivity.homeLocation;
+import static com.arcanex.clockapp.MainActivity.service;
 import static com.arcanex.clockapp.MyService.preferences;
 
 public class LocationHelper implements LocationListener {
@@ -38,120 +42,106 @@ public class LocationHelper implements LocationListener {
         } else {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 100, this);
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 100, this);
+
             homeLocaton.setLongitude(Double.valueOf(preferences.getString("home_long", "30.13908")));
             homeLocaton.setLatitude(Double.valueOf(preferences.getString("home_lat", " 61.03967")));
+            userAtHome = true;
+            outHomeAccuracyCount = 0;
+
+
         }
     }
 
 
     @Override
     public void onLocationChanged(android.location.Location location) {
-        NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-        if (location.getProvider() == LocationManager.GPS_PROVIDER) {
-            if (location.distanceTo(homeLocaton) > 300 && userAtHome && outHomeAccuracyCount > 2) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-                    int importance = NotificationManager.IMPORTANCE_HIGH;
-                    NotificationChannel channel = new NotificationChannel("dadayaebat", "name", importance);
-                    notificationManager.createNotificationChannel(channel);
-                }
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "dadayaebat")
-                        .setSmallIcon(R.drawable.micro_usb)
-                        .setContentText(location.getProvider() + ": " + location.distanceTo(homeLocaton) + "Юзер вышел из дома")
-                        .setOngoing(false)
-                        .setPriority(2)
-                        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
-
-                Notification notification = builder.build();
-                notificationManager.notify(12, notification);
-                Toast.makeText(context, location.getProvider() + ": " + location.distanceTo(homeLocaton) + "Юзер вышел из дома", Toast.LENGTH_SHORT).show();
-                userAtHome = false;
-                outHomeAccuracyCount = 0;
-            } else if (location.distanceTo(homeLocaton) > 300 && userAtHome) {
-                outHomeAccuracyCount++;
-            } else if (location.distanceTo(homeLocaton) < 300 && !userAtHome) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-                    int importance = NotificationManager.IMPORTANCE_HIGH;
-                    NotificationChannel channel = new NotificationChannel("dadayaebat", "name", importance);
-                    notificationManager.createNotificationChannel(channel);
-                }
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "dadayaebat")
-                        .setSmallIcon(R.drawable.micro_usb)
-                        .setContentText(location.getProvider() + ": " + location.distanceTo(homeLocaton) + "Юзер пришел домой")
-                        .setOngoing(false)
-                        .setPriority(2)
-                        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
-
-                Notification notification = builder.build();
-                notificationManager.notify(12, notification);
-                Toast.makeText(context, location.getProvider() + ": " + location.distanceTo(homeLocaton) + "Юзер пришел домой", Toast.LENGTH_SHORT).show();
-                userAtHome = true;
-            }
 
 
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+
+        String provider;
+        if (locationManager.getProvider(LocationManager.GPS_PROVIDER).getAccuracy() > locationManager.getProvider(LocationManager.NETWORK_PROVIDER).getAccuracy()) {
+            provider = LocationManager.NETWORK_PROVIDER;
         } else {
-            if (location.distanceTo(homeLocaton) > 600 && userAtHome && outHomeAccuracyCount > 2) {
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-                    int importance = NotificationManager.IMPORTANCE_HIGH;
-                    NotificationChannel channel = new NotificationChannel("dadayaebat", "name", importance);
-                    notificationManager.createNotificationChannel(channel);
-                }
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "dadayaebat")
-                        .setSmallIcon(R.drawable.micro_usb)
-                        .setContentText(location.getProvider() + ": " + location.distanceTo(homeLocaton) + "Юзер вышел из дома")
-                        .setOngoing(false)
-                        .setPriority(2)
-                        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
-
-                Notification notification = builder.build();
-                notificationManager.notify(12, notification);
-                Toast.makeText(context, location.getProvider() + ": " + location.distanceTo(homeLocaton) + "Юзер вышел из дома", Toast.LENGTH_SHORT).show();
-                userAtHome = false;
-                outHomeAccuracyCount = 0;
-            } else if (location.distanceTo(homeLocaton) > 600 && userAtHome){
-                outHomeAccuracyCount++;
+            provider = LocationManager.GPS_PROVIDER;
+        }
 
 
-            } else if (location.distanceTo(homeLocaton) < 600 && !userAtHome) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-                    int importance = NotificationManager.IMPORTANCE_HIGH;
-                    NotificationChannel channel = new NotificationChannel("dadayaebat", "name", importance);
-                    notificationManager.createNotificationChannel(channel);
-                }
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "dadayaebat")
-                        .setSmallIcon(R.drawable.micro_usb)
-                        .setContentText(location.getProvider() + ": " + location.distanceTo(homeLocaton) + "Юзер пришел домой")
-                        .setOngoing(false)
-                        .setPriority(2)
-                        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
-
-                Notification notification = builder.build();
-                notificationManager.notify(12, notification);
-                Toast.makeText(context, location.getProvider() + ": " + location.distanceTo(homeLocaton) + "Юзер пришел домой", Toast.LENGTH_SHORT).show();
-                userAtHome = true;
-            }
+        if (locationManager.getLastKnownLocation(provider) != null && locationManager.getLastKnownLocation(provider).distanceTo(homeLocaton) > 300 + location.getAccuracy() && userAtHome && outHomeAccuracyCount > 2) {
 
 
+
+            userAtHome = false;
+            outHomeAccuracyCount = 0;
+
+            service.internetConnection.sendData("user_ddefdaed/athome", "0");
+
+
+        } else if (locationManager.getLastKnownLocation(provider) != null && locationManager.getLastKnownLocation(provider).distanceTo(homeLocaton) > 300 + location.getAccuracy()  && userAtHome) {
+            outHomeAccuracyCount++;
+        } else if (locationManager.getLastKnownLocation(provider) != null && locationManager.getLastKnownLocation(provider).distanceTo(homeLocaton) < 300 + location.getAccuracy() && !userAtHome) {
+
+
+
+            userAtHome = true;
+            service.internetConnection.sendData("user_ddefdaed/athome", "1");
 
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 
-    public void setHomeLocation() {
+    public String setHomeAddress() {
+        List<Address> addresses = null;
         if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && context.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
+            Toast.makeText(context, "Ошибка: нет прав на геолокацию для приложения.", Toast.LENGTH_SHORT).show();
         } else {
             if ((locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), true))) != null) {
                 homeLocation = locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), true));
+                Geocoder geocoder = new Geocoder(context);
+
+                try {
+                    addresses = geocoder.getFromLocation(locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), true)).getLatitude(), locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), true)).getLongitude(), 1);
+                    Toast.makeText(context, addresses.get(0).getAddressLine(0), Toast.LENGTH_SHORT).show();
+                    homeLocaton.setLatitude(addresses.get(0).getLatitude());
+                    homeLocaton.setLongitude(addresses.get(0).getLongitude());
+                    preferences.edit().putString("home_long", String.valueOf(addresses.get(0).getLongitude())).commit();
+                    preferences.edit().putString("home_lat", String.valueOf(addresses.get(0).getLatitude())).commit();
+                    service.internetConnection.sendData("user_ddefdaed/lon", String.valueOf(addresses.get(0).getLongitude()));
+                    service.internetConnection.sendData("user_ddefdaed/lat", String.valueOf(addresses.get(0).getLatitude()));
+
+
+                } catch (Exception a){
+                    a.printStackTrace();
+                    return null;
+                }
+                if (addresses.get(0).getAddressLine(0) != null) {
+                    return addresses.get(0).getAddressLine(0);
+                } else {
+                    return "Ошибка, местоположение не найдено. Поставьте местоположение вручную";
+                }
+
             } else {
-                Toast.makeText(context, "Ошибка: геолокация отключена", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Ошибка: проблемы с доступом.", Toast.LENGTH_SHORT).show();
             }
-            Toast.makeText(context, locationManager.getBestProvider(new Criteria(), true)  + ": " + locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLatitude() + " " + locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).getLongitude(), Toast.LENGTH_LONG).show();
+
         }
+        return null;
     }
     public String setHomeAddress(String address){
         Geocoder geocoder = new Geocoder(context);
@@ -163,6 +153,8 @@ public class LocationHelper implements LocationListener {
             homeLocaton.setLongitude(addresses.get(0).getLongitude());
             preferences.edit().putString("home_long", String.valueOf(addresses.get(0).getLongitude())).commit();
             preferences.edit().putString("home_lat", String.valueOf(addresses.get(0).getLatitude())).commit();
+            service.internetConnection.sendData("user_ddefdaed/lon", String.valueOf(addresses.get(0).getLongitude()));
+            service.internetConnection.sendData("user_ddefdaed/lat", String.valueOf(addresses.get(0).getLatitude()));
 
 
         } catch (Exception a){

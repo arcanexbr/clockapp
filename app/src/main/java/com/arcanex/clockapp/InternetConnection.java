@@ -52,9 +52,9 @@ public class InternetConnection extends Connection {
     public void connect() {
 
         if (tryConnectThread == null ||!tryConnectThread.isAlive()) {
-              tryConnectThread = new TryConnectThread();
-              tryConnectThread.start();
-          }
+            tryConnectThread = new TryConnectThread();
+            tryConnectThread.start();
+        }
 
 
     }
@@ -72,51 +72,51 @@ public class InternetConnection extends Connection {
 
 
 
-private class TryConnectThread extends Thread {
-    @Override
-    public void run() {
-        if (client != null && client.isConnected()){
-            try {
-                client.disconnect();
-            } catch (MqttException e) {
-                e.printStackTrace();
+    private class TryConnectThread extends Thread {
+        @Override
+        public void run() {
+            if (client != null && client.isConnected()){
+                try {
+                    client.disconnect();
+                } catch (MqttException e) {
+                    e.printStackTrace();
+                }
             }
+            WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            do {
+                if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected() || (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected() && wifiManager.getConnectionInfo().getSSID() != context.getString(R.string.espWifiName))) {
+                    String serverURL = "tcp://" + internet_server + ":" + internet_port;
+                    final String clientId = MqttClient.generateClientId();
+                    client = new MqttAndroidClient(context, serverURL , clientId);
+                    options = new MqttConnectOptions();
+                    options.setUserName(internet_user);
+                    options.setPassword(internet_password.toCharArray());
+                    try {
+
+                        client.setCallback(mqttCallback);
+                        token = client.connect(options);
+                        token.setActionCallback(iMqttActionListener);
+                        sleep(1000*internet_autoconnection_time_in_sec);
+
+
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+
+                } else {
+                    try {
+                        sleep(1000*internet_autoconnection_time_in_sec);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } while ((client == null || !client.isConnected()) && internet_autoconnection);
         }
-        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        do {
-            if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected() || (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected() && wifiManager.getConnectionInfo().getSSID() != context.getString(R.string.espWifiName))) {
-                String serverURL = "tcp://" + internet_server + ":" + internet_port;
-                final String clientId = MqttClient.generateClientId();
-                client = new MqttAndroidClient(context, serverURL , clientId);
-                options = new MqttConnectOptions();
-                options.setUserName(internet_user);
-                options.setPassword(internet_password.toCharArray());
-                try {
-
-                    client.setCallback(mqttCallback);
-                    token = client.connect(options);
-                    token.setActionCallback(iMqttActionListener);
-                    sleep(1000*internet_autoconnection_time_in_sec);
-
-
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
-
-            } else {
-                try {
-                    sleep(1000*internet_autoconnection_time_in_sec);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        } while ((client == null || !client.isConnected()) && internet_autoconnection);
     }
-}
 
 
 }

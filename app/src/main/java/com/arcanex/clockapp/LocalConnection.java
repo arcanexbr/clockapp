@@ -68,6 +68,7 @@ public class LocalConnection extends Connection {
             if (connectivityManager.getNetworkInfo(networks[i]).getType() == ConnectivityManager.TYPE_WIFI) {
                 try {
                     networks[i].bindSocket(udpSocket);
+                    break;
                 } catch (Exception a) {
                     a.printStackTrace();
                 }

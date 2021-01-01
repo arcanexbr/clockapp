@@ -34,6 +34,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2">
 
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="4dp"
+                android:alpha="0.5"
+                android:fontFamily="@font/nokia_bold"
+                android:text="NastyaLight v. 01.2020"
+                android:textColor="#FFF"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -91,70 +104,6 @@
 
 
         </ListView>
-
-
-
-
-
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="50dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="44dp"
-        android:src="@drawable/ic_temp"
-        android:tint="#FFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:fontFamily="@font/nokia_bold"
-        android:text="25 C"
-        android:textColor="#FFF"
-        android:textSize="35dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView3" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="54dp"
-        android:layout_height="53dp"
-        android:layout_marginBottom="44dp"
-        android:src="@drawable/ic_humid"
-        android:tint="#FFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="44dp"
-        android:fontFamily="@font/nokia_bold"
-        android:text="47%"
-        android:textColor="#FFF"
-        android:textSize="35dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

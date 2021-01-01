@@ -43,7 +43,7 @@
         android:linksClickable="true"
         android:autoLink="web"
         android:textColorHighlight="#000"
-        android:text="vk.com/nrtdth\nvk.com/arcanex"
+        android:text="vk.com/nrdth"
         android:textColor="#FFF"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"

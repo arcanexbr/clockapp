@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -31,6 +32,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -55,7 +57,16 @@ import static com.arcanex.clockapp.MainActivity.wifi_password;
 
 
 public class SettingsActivity extends PreferenceActivity {
-
+    public static void setWindowFlag(Activity activity, final int bits, boolean on) {
+        Window win = activity.getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
+    }
 
 
     @Override
@@ -63,6 +74,8 @@ public class SettingsActivity extends PreferenceActivity {
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 
         super.onCreate(savedInstanceState);
+        setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
 
 
         addPreferencesFromResource(R.xml.application_settings);
@@ -169,12 +182,13 @@ public class SettingsActivity extends PreferenceActivity {
         findPreference("sendAuthData").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Service.WIFI_SERVICE);
+               final WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Service.WIFI_SERVICE);
                 System.out.println(wifiManager.getConnectionInfo().getSSID());
                 if (wifiManager.getConnectionInfo().getSSID().equals("\"Nightlight\"")) {
                     MainActivity.localConnection.sendAuthData(SettingsActivity.this, new LocalConnection.LocalConnecionListener() {
                         @Override
                         public void onSuccessSend() {
+                            Toast.makeText(getApplicationContext(), "Данные отправлены через сеть " + wifiManager.getConnectionInfo().getSSID(), Toast.LENGTH_LONG).show();
 
                         }
 
@@ -183,14 +197,6 @@ public class SettingsActivity extends PreferenceActivity {
 
                         }
                     });
-                } else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(), "Ты сначала к хот-спорту Nightlight подключись, а потом поговорим", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    startActivityForResult(new Intent(Settings.ACTION_WIFI_SETTINGS), 0);
                 }
 
 
